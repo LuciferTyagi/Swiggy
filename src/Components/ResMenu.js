@@ -19,12 +19,13 @@ const ResMenu = () =>{
 
 
     const fetchMenu = async () =>{
-        const data = await  fetch(MENU_API+ resId +"&catalog_qa=undefined&submitAction=ENTER");
+        const data = await  fetch(MENU_API + resId );
         
         const json = await data.json();
        
-        console.log(json);
+        // console.log(json);
         setResInfo(json.data);
+
         };
 
         if(resInfo === null) return (<Shimmer />)
@@ -33,13 +34,15 @@ const ResMenu = () =>{
         const {name , cuisines , costForTwoMessage} = resInfo?.cards[0]?.card?.card?.info;
         
         const {cards}  = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
-        console.log(cards)
+        // console.log(cards)
         return (
+
     <div className="menu">
         <h1>{name}</h1>
         <p>{cuisines.join(",")} . {costForTwoMessage}</p>
         
         <ul>
+
         {/* {cards.map((card, index) => (
                 card.card.card.title && <li key={index}>{card.card.card.title}</li>
             ))} */}
@@ -47,11 +50,7 @@ const ResMenu = () =>{
 
             {cards.map( (item ,id) => item.card.card.title && <li key={item.card.card.itemCards[0].card.info.id}>{item.card.card.title} -₹{item.card.card.itemCards[0].card.info.price/100}</li>)}
             
-             {/* <li>{cards[1].card.card.itemCards[0].card.info.name}</li>  
-            <li>{cards[2].card.card.itemCards[0].card.info.name}</li> 
-            <li>{cards[3].card.card.itemCards[0].card.info.name}</li> 
-            <li>{cards[4].card.card.itemCards[0].card.info.name}</li> 
-            <li>{cards[5].card.card.itemCards[0].card.info.name}</li>   */}
+             
            
            
         </ul>
