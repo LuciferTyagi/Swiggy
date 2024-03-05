@@ -8,7 +8,9 @@ return (
         <User name={"Lucifer Tyagi"}
               location = {"Meerut"}  
         />
-        <UserClass />
+        <UserClass name={"Yagyansh Tyagi (class)"}
+                   location={"Ghaziabad"} 
+        />
     </div>
 )
 }
