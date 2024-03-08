@@ -2,6 +2,8 @@ import ResCard from "./ResCard.js";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer.js";
 import { Link } from "react-router-dom";
+import { LIST_API } from "../utlis/constant.js";
+import useOnlineStatus from "../utlis/useOnlineStatus.jsx";
 
 const Body = () => {
     const [listOfRes, setListOfRes] = useState([]);
@@ -13,13 +15,25 @@ const Body = () => {
     }, []);
 
     const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7336001&lng=77.7602283&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch(LIST_API);
+
         const json = await data.json();
         console.log(json);
         const restaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRes(restaurants);
         setFilteredRes(restaurants);
     };
+
+    const onlineStatus = useOnlineStatus();
+
+    if (onlineStatus === false) {
+        return (
+            <h1>Looks like you are offline, check your internet connection</h1>
+        );
+    }
+    
+         
+    
 
     return listOfRes.length === 0 ? (<Shimmer />) : (
         <div className="body">

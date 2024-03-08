@@ -7,12 +7,9 @@ const ResCard = (props) => {
   
     const { resData } = props;
     const { name, cloudinaryImageId, avgRating } = resData?.info;
-    // const { deliveryTime } = resData?.info;
-    // const {cuisines} = resData?.info?.cuisines;
     const cuisineNames = resData?.info?.cuisines;
   
-    // Extracting cuisine names into an array
-    // const cuisineNames = resData?.info?.cuisines.map((cuisineItem) => cuisineItem.name);
+   
     
 
   

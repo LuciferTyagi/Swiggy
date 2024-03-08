@@ -2,28 +2,21 @@ import Shimmer from "./shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utlis/useRestaurantMenu";
 
-
-
-
-
 const ResMenu = () =>{
 
     
-
     const {resId} = useParams();
-
     const resInfo = useRestaurantMenu(resId);
 
     
         if(resInfo === null) return (<Shimmer />)
         
 
-        const {name , cuisines , costForTwoMessage} = resInfo?.cards[0]?.card?.card?.info;
-        
+        const {name , cuisines , costForTwoMessage} = resInfo?.cards[0]?.card?.card?.info;  
         const {cards}  = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
         // console.log(cards)
+       
         return (
-
     <div className="menu">
         <h1>{name}</h1>
         <p>{cuisines.join(",")} . {costForTwoMessage}</p>
