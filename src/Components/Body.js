@@ -38,14 +38,14 @@ const Body = () => {
     return listOfRes.length === 0 ? (<Shimmer />) : (
         <div className="body">
             <div className="filter">
-                <div className="search">
+                <div className="m-4 p-4">
                     <input
                         type="text"
-                        className="search-box"
+                        className="border border-solid border-black"
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                     />
-                    <button
+                    <button className=" p-4 bg-green-100 m-4"
                         onClick={() => {
                             const filterRes = listOfRes.filter(
                                 (resData) => resData.info.name.toLowerCase().includes(searchText.toLowerCase())
