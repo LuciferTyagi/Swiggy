@@ -1,44 +1,50 @@
-import leaf from "../Images/leaf.png"
-import ratinglogo from "../Images/rating.png"
+import leaf from "../Images/leaf.png";
+import ratinglogo from "../Images/rating.png";
 import { CDN_URL } from "../utlis/constant";
+import { useState } from "react";
 
+const ResCard = ({ resData }) => {
+  const { name, cloudinaryImageId, avgRating } = resData?.info;
+  const cuisineNames = resData?.info?.cuisines;
 
-const ResCard = (props) => {
-  
-    const { resData } = props;
-    const { name, cloudinaryImageId, avgRating } = resData?.info;
-    const cuisineNames = resData?.info?.cuisines;
-  
-   
-    
+  // State to track if the card is being hovered
+  const [isHovered, setIsHovered] = useState(false);
 
-  
-    return (
-      <div className="res-card">
-        <div className="res-logo">
-          <img src={CDN_URL+ cloudinaryImageId} alt={name}></img>
-        </div>
-        <div className="card-info">
-          <h2 className="cafe-name">
-            {name}
-            <img src={leaf} alt="Leaf" />
-          </h2>
-          <h3 className="rating">
-            <img className="indicator" src={ratinglogo} alt="Rating Indicator" />
-            {/* {rating.rating_text} . {deliveryTime} */}
-            {avgRating}
-          </h3>
-          {/* Displaying cuisine names with comma separation */}
-          {Array.isArray(cuisineNames) && (
-          <p className="para">{cuisineNames.join(', ')}</p>
-        )}
-          
-        </div>
-        <button className="order">Buy</button>
+  return (
+    <div 
+      className="m-4 p-4 bg-white rounded-lg shadow-md w-[300px] h-[400px] flex flex-col justify-between flex-shrink-0 transform transition-transform duration-300 hover:scale-105"
+      onMouseEnter={() => setIsHovered(true)} // Set isHovered to true on mouse enter
+      onMouseLeave={() => setIsHovered(false)} // Set isHovered to false on mouse leave
+      style={{ position: 'relative' }} // Add position relative to the card
+    >
+      {/* Outline animation */}
+      {isHovered && (
+        <div 
+          className="absolute top-0 left-0 right-0 bottom-0 border border-blue-500 rounded-lg pointer-events-none"
+          style={{ animation: 'pulse 1s infinite alternate' }} // Apply pulse animation
+        />
+      )}
+
+      <div className="res-logo">
+        <img src={CDN_URL + cloudinaryImageId} alt={name} className="rounded-md h-[200px] w-full object-cover" />
       </div>
-    );
-  };
-  
-  export default ResCard;
-  
-  
+      <div className="card-info">
+        <h2 className="cafe-name text-lg font-bold">{name}</h2>
+        <div className="flex items-center mt-2">
+          <img className="mr-1 w-6 h-6" src={leaf} alt="Leaf" />
+          <img className="mr-1 w-6 h-6" src={ratinglogo} alt="Rating Indicator" />
+          <span>{avgRating}</span>
+        </div>
+        {/* Displaying cuisine names with comma separation */}
+        {Array.isArray(cuisineNames) && (
+          <p className="para mt-2">{cuisineNames.join(", ")}</p>
+        )}
+      </div>
+      <button className="order bg-blue-500 hover:bg-green-500 text-white font-semibold px-4 py-2 rounded-md transition-colors duration-300">
+        Buy
+      </button>
+    </div>
+  );
+};
+
+export default ResCard;

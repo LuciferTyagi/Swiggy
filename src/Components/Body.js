@@ -31,13 +31,10 @@ const Body = () => {
             <h1>Looks like you are offline, check your internet connection</h1>
         );
     }
-    
-         
-    
 
     return listOfRes.length === 0 ? (<Shimmer />) : (
-        <div className="body">
-            <div className="filter">
+        <div className="body bg-slate-100">
+            <div className="filter flex">
                 <div className="m-4 p-4">
                     <input
                         type="text"
@@ -45,7 +42,7 @@ const Body = () => {
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                     />
-                    <button className=" p-4 bg-green-100 m-4"
+                    <button className=" px-4 py-2 bg-green-100 m-4 rounded-lg"
                         onClick={() => {
                             const filterRes = listOfRes.filter(
                                 (resData) => resData.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -56,29 +53,33 @@ const Body = () => {
                         Search
                     </button>
                 </div>
-                <button
-                    className="filter-btn"
-                    onClick={() => {
-                        const topRatedRes = listOfRes.filter(
-                            (resData) => parseFloat(resData.info.avgRating) > 4.2
-                        );
-                        setFilteredRes(topRatedRes);
-                    }}
-                >
-                    Top Rated Restaurants
-                </button>
-            </div>
-            <div className="res-container">
-    {filteredRes.map((restaurant, index) => (
-        <Link 
-            key={restaurant.info.id + index} // Combine id with index to ensure uniqueness
-            to={"/restaurants/" + restaurant.info.id}
-        >
-            <ResCard resData={restaurant} />
-        </Link>
-    ))}
-</div>
 
+                <div className="m-4 p-4 flex items-center">
+                    <button
+                        className="px-4 py-2 bg-green-100 rounded-lg"
+                        onClick={() => {
+                            const topRatedRes = listOfRes.filter(
+                                (resData) => parseFloat(resData.info.avgRating) > 4.2
+                            );
+                            setFilteredRes(topRatedRes);
+                        }}
+                    >
+                        Top Rated Restaurants
+                    </button>
+                </div>
+               
+            </div>
+            <div className="grid grid-cols-4 gap-4">
+                {filteredRes.map((restaurant, index) => (
+                    <Link 
+                        key={restaurant.info.id + index} // Combine id with index to ensure uniqueness
+                        to={"/restaurants/" + restaurant.info.id}
+                        className="flex-shrink-0" // Ensure the card does not shrink
+                    >
+                        <ResCard resData={restaurant} />
+                    </Link>
+                ))}
+            </div>
         </div>
     );
 }
