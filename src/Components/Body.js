@@ -1,4 +1,4 @@
-import ResCard from "./ResCard.js";
+import ResCard , {withPromotedLabel} from "./ResCard.js";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer.js";
 import { Link } from "react-router-dom";
@@ -10,6 +10,8 @@ const Body = () => {
     const [filteredRes, setFilteredRes] = useState([]);
     const [searchText, setSearchText] = useState("");
 
+    console.log(listOfRes);
+    const RestaurantCardPromoted = withPromotedLabel(ResCard);
     useEffect(() => {
         fetchData();
     }, []);
@@ -76,7 +78,13 @@ const Body = () => {
                         to={"/restaurants/" + restaurant.info.id}
                         className="flex-shrink-0" // Ensure the card does not shrink
                     >
+
+                        {restaurant.info.isOpen ? (
+                        <RestaurantCardPromoted resData={restaurant}/> 
+                        ) : (
                         <ResCard resData={restaurant} />
+                        )}
+
                     </Link>
                 ))}
             </div>

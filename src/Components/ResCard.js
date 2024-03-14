@@ -47,4 +47,21 @@ const ResCard = ({ resData }) => {
   );
 };
 
+//Higher Order Componenet
+
+// Input - ResCard => ResCardPromoted
+
+export const withPromotedLabel = (ResCard) => {
+  return (props) => {
+    return (
+      <div style={{ position: 'relative' }}>
+        <label className="bg-black text-white m-2 p-2 rounded-lg" style={{ position: 'absolute', zIndex: 1 }}>
+          OPEN
+        </label>
+        <ResCard {...props}/>
+      </div>
+    )
+  }
+}
+
 export default ResCard;
