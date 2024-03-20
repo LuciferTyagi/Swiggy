@@ -10,7 +10,8 @@ const Body = () => {
     const [filteredRes, setFilteredRes] = useState([]);
     const [searchText, setSearchText] = useState("");
 
-    console.log(listOfRes);
+    // console.log(listOfRes);
+
     const RestaurantCardPromoted = withPromotedLabel(ResCard);
     useEffect(() => {
         fetchData();
@@ -20,7 +21,7 @@ const Body = () => {
         const data = await fetch(LIST_API);
 
         const json = await data.json();
-        console.log(json);
+        // console.log(json);
         const restaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRes(restaurants);
         setFilteredRes(restaurants);
