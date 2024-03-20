@@ -1,12 +1,13 @@
 import leaf from "../Images/leaf.png";
 import ratinglogo from "../Images/rating.png";
+import UserContext from "../utlis/UserContext";
 import { CDN_URL } from "../utlis/constant";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const ResCard = ({ resData }) => {
   const { name, cloudinaryImageId, avgRating } = resData?.info;
   const cuisineNames = resData?.info?.cuisines;
-
+  const {loggedInUser} = useContext(UserContext);
   // State to track if the card is being hovered
   const [isHovered, setIsHovered] = useState(false);
 
@@ -39,6 +40,7 @@ const ResCard = ({ resData }) => {
         {Array.isArray(cuisineNames) && (
           <p className="para mt-2">{cuisineNames.join(", ")}</p>
         )}
+      
       </div>
       <button className="order bg-blue-500 hover:bg-green-500 text-white font-semibold px-4 py-2 rounded-md transition-colors duration-300">
         Buy
