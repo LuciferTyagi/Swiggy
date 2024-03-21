@@ -11,6 +11,7 @@ import UserContext from "./utlis/UserContext.js";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import appStore from "./utlis/appStore.js";
+import Cart from "./Components/Cart.js";
 // import Grocery from "./Components/Grocery.js";
 
 
@@ -72,6 +73,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurants/:resId",
                 element: <ResMenu />,
+            },
+            {
+                path: "/cart",
+                element: <Cart />,
             },
         ],
 
