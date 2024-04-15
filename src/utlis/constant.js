@@ -3,3 +3,4 @@
  export const MENU_API = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7336001&lng=77.7602283&restaurantId=";
 
  export const LIST_API = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7336001&lng=77.7602283&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+
