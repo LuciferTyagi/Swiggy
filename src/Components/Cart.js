@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import ItemList from "./itemList";
+import ItemList from "./ItemList";
 import { clearCart } from "../utlis/cartSlice";
 const Cart = () => {
 
@@ -21,7 +21,7 @@ const Cart = () => {
                     Clear Cart
                 </button>
                 {cartItems.length === 0 && <h1>Cart is empty 🪹Add items to cart</h1>}
-                <ItemList items={cartItems}>
+                <ItemList items={cartItems} isInCartPage={true}>
                     
                 </ItemList>
             </div>
