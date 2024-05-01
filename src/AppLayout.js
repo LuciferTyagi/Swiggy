@@ -16,7 +16,11 @@ import ResCard, { withPromotedLabel } from "./Components/ResCard.js";
 import Hero from "./Components/Hero.js";
 import ResSection from "./Components/ResSection.js";
 import { LIST_API } from "./utlis/constant.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import Grocery from "./Components/Grocery.js";
+
 
 
 
@@ -42,7 +46,7 @@ const AppLayout = () => {
     }, []);
     return (
         <Provider store={appStore}>
-
+          <ToastContainer />
             <UserContext.Provider value={{ loggedInUser: userName }}>
                 <div className="app">
                     <Header />
@@ -50,6 +54,7 @@ const AppLayout = () => {
 
 
                 </div>
+            
             </UserContext.Provider>
         </Provider>
     );

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utlis/constant";
 import { addItem, removeItem } from "../utlis/cartSlice";
-import { useState } from "react";
+
 
 const ItemList = ({ items, isInCartPage }) => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const ItemList = ({ items, isInCartPage }) => {
 
   return (
     <div>
+      
       {items.map((item) => (
         <div
           key={item.card.info.id}

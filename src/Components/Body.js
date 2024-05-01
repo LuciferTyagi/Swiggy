@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar.js";
 
 
 
+
 const Body = () => {
     
    
@@ -36,6 +37,7 @@ const Body = () => {
         const json = await data.json();
         
         const restaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        console.log(restaurants)
         setListOfRes(restaurants);
         setFilteredRes(restaurants);
     };
@@ -55,6 +57,7 @@ const Body = () => {
     // }
 
     return listOfRes?.length === 0 ? (<Shimmer />) : (
+        
         <div className="body bg-white-200  overflow-x-hidden  ">
           
            
