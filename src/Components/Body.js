@@ -9,6 +9,8 @@ import useOnlineStatus from "../utlis/useOnlineStatus.jsx";
 import About from "./About.js";
 import Header from "./Header.js"
 import SearchBar from "./SearchBar.js";
+import { animateScroll as scroll } from 'react-scroll';
+import { useRef } from "react";
 
 
 
@@ -17,7 +19,7 @@ import SearchBar from "./SearchBar.js";
 const Body = () => {
     
    
-
+    const restaurantListRef = useRef(null);
     const RestaurantCardPromoted = withPromotedLabel(ResCard);
     
     const [listOfRes, setListOfRes] = useState([]);
@@ -47,7 +49,11 @@ const Body = () => {
         );
         setFilteredRes(filterRes);
     };
-
+    const scrollToRestaurantList = () => {
+        if (restaurantListRef.current) {
+            restaurantListRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     // const onlineStatus = useOnlineStatus();
 
     // if (onlineStatus === false) {
@@ -98,10 +104,11 @@ const Body = () => {
              searchText={searchText}
              setSearchText={setSearchText}
              handleSearch={handleSearch}
+             scrollToRestaurantList={scrollToRestaurantList}
             ></SearchBar>
                 <Hero></Hero>
                 <ResSection></ResSection>
-                 <div className="grid grid-cols-4 gap-4">
+                 <div  ref={restaurantListRef} className="res-list grid grid-cols-4 gap-4">
                  {  filteredRes.map((restaurant, index) => (
                     <Link 
                         key={restaurant.info.id + index} // Combine id with index to ensure uniqueness

@@ -1,9 +1,8 @@
 import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utlis/constant";
-import { addItem, removeItem } from "../utlis/cartSlice";
+import { addItem, decreaseItems, removeItem } from "../utlis/cartSlice";
 
-
-const ItemList = ({ items, isInCartPage }) => {
+const ItemList = ({ items, isInCartPage, totalCartQuantity }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
@@ -13,10 +12,13 @@ const ItemList = ({ items, isInCartPage }) => {
   const handleRemoveItem = (item) => {
     dispatch(removeItem(item));
   };
+  const handleDecreaseCart = (item) => {
+    dispatch(decreaseItems(item));
+  };
+  
 
   return (
     <div>
-      
       {items.map((item) => (
         <div
           key={item.card.info.id}
@@ -37,26 +39,50 @@ const ItemList = ({ items, isInCartPage }) => {
           </div>
 
           <div className="w-3/12 p-4">
-            <div className="absolute">
+            
+              {!isInCartPage && (<button
+                className="p-2 px-4 absolute right-[34%] rounded-lg bg-black text-green-300 shadow-lg"
+                onClick={() => handleAddItem(item)}
+              >
+                Add
+              </button>)}
               
-                <button
-                  className="p-2 mx-16 rounded-lg bg-black text-green-300 shadow-lg"
-                  onClick={() => handleAddItem(item)}
-                >
-                  Add +
-                </button>
-              
+              <div >
+                  
               {isInCartPage && (
                 <button
-                  className="p-2 mx-16 rounded-lg bg-black text-green-300 shadow-lg"
+                  className="p-2 mx-16  absolute right-[16%] rounded-lg bg-black text-green-300 shadow-lg"
                   onClick={() => handleRemoveItem(item)}
                 >
-                  Remove -
+                  Remove
                 </button>
               )}
             </div>
+            {isInCartPage && (
+              <div className="cart-quantity">
+                <button
+                  type="button"
+                  className="font-bold text-red-700"
+                  onClick={()=> handleDecreaseCart(item)}
+                
+                >
+                  -
+                </button>
+                <div className="count font-medium text-slate-400">{item.cartQuantity}</div>
+                <button
+                type="button"
+                className="font-bold text-teal-500"
+                onClick={()=> handleAddItem(item)}
+               
+                >+</button>
+              </div>
+            )}
           </div>
-          <img src={CDN_URL + item.card.info.imageId} className="w-20" alt="item"></img>
+          <img
+            src={CDN_URL + item.card.info.imageId}
+            className="w-20"
+            alt="item"
+          ></img>
         </div>
       ))}
     </div>
